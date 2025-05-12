@@ -946,11 +946,4 @@
             </div>
         </section>
 
-        <!-- Footer -->
-        <footer>
-            <div class="container">
-                <div class="footer-container">
-                    <div class="footer-col">
-                        <h3>About Us</h3>
-                        <ul>
-                            <li><a href="#">Company
+       <%@ include file="footer.jsp" %>

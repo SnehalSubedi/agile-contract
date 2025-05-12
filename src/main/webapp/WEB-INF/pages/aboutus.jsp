@@ -921,8 +921,4 @@
             </div>
         </section>
 
-        <!-- Call to Action Section -->
-        <section class="cta">
-            <div class="container">
-                <h2 class="cta-title">Join the Agile Contracts Revolution</h2>
-                <p class="cta-subtitle">Experience the future of
+              <%@ include file="footer.jsp" %>

@@ -74,7 +74,7 @@ public class DashboardServlet extends HttpServlet {
     private void viewAllContracts(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            ArrayList<Contract> contracts = DashboardService.getRecentContracts();
+            ArrayList<Contract> contracts = DashboardService.getAllContract();
             setUserAttributes(request);
             request.setAttribute("contracts", contracts);
             forwardToPage(request, response, "WEB-INF/pages/admin/contracts.jsp");

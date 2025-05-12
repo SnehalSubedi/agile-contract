@@ -369,23 +369,7 @@
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-      <div class="container">
-        <div class="footer-content">
-          <div class="logo">Agile<span>Contracts</span></div>
-          <ul class="footer-links">
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Service</a></li>
-            <li><a href="#">FAQ</a></li>
-            <li><a href="#">Careers</a></li>
-          </ul>
-        </div>
-        <div class="copyright">
-          &copy; 2025 Agile Contracts. All rights reserved.
-        </div>
-      </div>
-    </footer>
+          <%@ include file="footer.jsp" %>
 </body>
 
 </html>

@@ -35,6 +35,10 @@
 
                         <button type="submit">Login</button>
                     </form>
+                    <br>
+                                <p class="signup-link">Create an new account?
+                <a href="${pageContext.request.contextPath}/register">Sign up here</a>
+            </p>
         </div>
     </div>
 </body>

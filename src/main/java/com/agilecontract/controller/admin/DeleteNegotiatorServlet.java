@@ -18,9 +18,11 @@ public class DeleteNegotiatorServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        System.out.print("in delete negociator servlet");
+
         // Get the negotiator ID from request parameter
         String idParam = request.getParameter("id");
+        System.out.print(idParam);
         
         if (idParam == null || idParam.isEmpty()) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Negotiator ID is required");

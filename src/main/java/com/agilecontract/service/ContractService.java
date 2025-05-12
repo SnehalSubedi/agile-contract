@@ -28,6 +28,7 @@ public class ContractService {
                     contract.setValue(rs.getDouble("Value"));
                     contract.setStatus(rs.getString("Status"));
                     contract.setCreatedBy(rs.getString("CreatedBy"));
+                    contract.setNegotiatorId(rs.getInt("NegotiatorID"));
                 }
             }
         }
@@ -49,6 +50,17 @@ public class ContractService {
                 stmt.setInt(7, contractId);
                 int rowsUpdated = stmt.executeUpdate();
                 return rowsUpdated > 0;
+            }
+        }
+    }
+    // Method to delete contract from the database by ID
+    public boolean deleteContract(int contractId) throws SQLException {
+        try (Connection conn = DbConfig.getConnection()) {
+            String deleteQuery = "DELETE FROM contracts WHERE ContractID = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(deleteQuery)) {
+                stmt.setInt(1, contractId);
+                int rowsDeleted = stmt.executeUpdate();
+                return rowsDeleted > 0;
             }
         }
     }

@@ -18,7 +18,7 @@ import com.agilecontract.util.ImageUtil;
 import com.agilecontract.Model.User;
 import com.agilecontract.config.DbConfig;
 
-@WebServlet("/AddNegotiator")
+@WebServlet("/AddNegotiatorServlet")
 @MultipartConfig
 public class AddNegotiatorServlet extends HttpServlet {
 
@@ -47,9 +47,9 @@ public class AddNegotiatorServlet extends HttpServlet {
 
         try (Connection conn = DbConfig.getConnection()) {
             UserService userService = new UserService(conn);
-
             if (userService.usernameExists(username)) {
-                response.getWriter().println("Username already exists.");
+                request.setAttribute("message", "Username already exists.");
+                request.getRequestDispatcher("WEB-INF/pages/admin/add-negotiator.jsp").forward(request, response);
             } else {
                 // Create a new user with the hashed password
                 User user = new User(username, password, fullName, email, contactNumber, role, passwordHash);
@@ -57,12 +57,13 @@ public class AddNegotiatorServlet extends HttpServlet {
 
                 boolean success = userService.addUser(user);
                 if (success) {
-                    // Redirect to dashboard or confirmation page
                     response.sendRedirect("/agile-contract/Admin-Dashboard");
                 } else {
-                    response.getWriter().println("Error adding user.");
+                    request.setAttribute("message", "Error adding user.");
+                    request.getRequestDispatcher("WEB-INF/pages/admin/add-negotiator.jsp").forward(request, response);
                 }
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
             response.getWriter().println("Database error: " + e.getMessage());

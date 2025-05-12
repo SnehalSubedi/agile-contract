@@ -87,4 +87,78 @@ public class UserService {
         }
         return "";
     }
+ // Add these methods to your UserService class
+
+ // Get user by ID
+ public User getUserById(int userId) throws SQLException {
+     String sql = "SELECT * FROM users WHERE UserID = ?";
+     try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+         stmt.setInt(1, userId);
+         ResultSet rs = stmt.executeQuery();
+         if (rs.next()) {
+             User user = new User();
+             user.setId(rs.getInt("UserID"));
+             user.setUsername(rs.getString("Username"));
+             user.setFullName(rs.getString("FullName"));
+             user.setEmail(rs.getString("Email"));
+             user.setContactNumber(rs.getString("ContactNumber"));
+             user.setRole(rs.getString("Role"));
+             user.setImagePath(rs.getString("image_path"));
+             user.setPasswordHash(rs.getString("PasswordHash"));
+             return user;
+         }
+         return null;
+     } catch (SQLException e) {
+         e.printStackTrace();
+         throw new SQLException("Error retrieving user by ID", e);
+     }
+ }
+
+ // Update user information
+ public boolean updateUser(User user) throws SQLException {
+     String sql = "UPDATE users SET Username = ?, FullName = ?, Email = ?, ContactNumber = ?, Role = ?, image_path = ?, PasswordHash = ? WHERE UserID = ?";
+     try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+         stmt.setString(1, user.getUsername());
+         stmt.setString(2, user.getFullName());
+         stmt.setString(3, user.getEmail());
+         stmt.setString(4, user.getContactNumber());
+         stmt.setString(5, user.getRole());
+         stmt.setString(6, user.getImagePath());
+         stmt.setString(7, user.getPasswordHash());
+         stmt.setInt(8, user.getId());
+
+         int rows = stmt.executeUpdate();
+         return rows > 0;
+     } catch (SQLException e) {
+         e.printStackTrace();
+         throw new SQLException("Error updating user", e);
+     }
+ }
+
+ // Check if email already exists (for another user)
+ public boolean emailExists(String email) throws SQLException {
+     String sql = "SELECT UserID FROM users WHERE Email = ?";
+     try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+         stmt.setString(1, email);
+         ResultSet rs = stmt.executeQuery();
+         return rs.next(); // true if found
+     } catch (SQLException e) {
+         e.printStackTrace();
+         throw new SQLException("Error checking email existence", e);
+     }
+ }
+
+ // Check if email exists for another user (used during updates)
+ public boolean emailExistsForOtherUser(String email, int userId) throws SQLException {
+     String sql = "SELECT UserID FROM users WHERE Email = ? AND UserID != ?";
+     try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+         stmt.setString(1, email);
+         stmt.setInt(2, userId);
+         ResultSet rs = stmt.executeQuery();
+         return rs.next(); // true if found
+     } catch (SQLException e) {
+         e.printStackTrace();
+         throw new SQLException("Error checking email existence for other user", e);
+     }
+ }
 }

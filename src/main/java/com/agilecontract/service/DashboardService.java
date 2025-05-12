@@ -62,6 +62,24 @@ public class DashboardService {
         return recentContracts;
     }
 
+    public static ArrayList<Contract> getAllContract() throws SQLException {
+        ArrayList<Contract> recentContracts = new ArrayList<>();
+
+        try (Connection conn = DbConfig.getConnection()) {
+            String listQuery = "SELECT c.*, u.FullName AS NegotiatorName " +
+                    "FROM contracts c " +
+                    "LEFT JOIN users u ON c.NegotiatorID = u.UserID " +
+                    "ORDER BY c.ContractID DESC";
+            try (PreparedStatement stmt = conn.prepareStatement(listQuery)) {
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    Contract c = mapContractFromResultSet(rs);
+                    recentContracts.add(c);
+                }
+            }
+        }
+        return recentContracts;
+    }
     private static Contract mapContractFromResultSet(ResultSet rs) throws SQLException {
         Contract c = new Contract();
         c.setId(rs.getInt("ContractID"));

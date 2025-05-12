@@ -39,6 +39,7 @@ public class FetchAllNegotiator extends HttpServlet {
             ArrayList<User> negotiators = getAllNegotiators(conn);
             
             request.setAttribute("negotiators", negotiators);
+            System.out.print(negotiators.getFirst().getImagePath());
             request.getRequestDispatcher("WEB-INF/pages/admin/negotiators.jsp").forward(request, response);
             
         } catch (Exception e) {
@@ -50,7 +51,7 @@ public class FetchAllNegotiator extends HttpServlet {
 
     private ArrayList<User> getAllNegotiators(Connection conn) throws SQLException {
         ArrayList<User> negotiators = new ArrayList<>();
-        String query = "SELECT UserID, FullName, Email, ContactNumber FROM users WHERE Role = 'ContractNegotiator' ORDER BY FullName";
+        String query = "SELECT UserID, FullName, Email, ContactNumber,image_path FROM users WHERE Role = 'ContractNegotiator' ORDER BY FullName";
         
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
             ResultSet rs = stmt.executeQuery();
@@ -60,6 +61,8 @@ public class FetchAllNegotiator extends HttpServlet {
                 user.setFullName(rs.getString("FullName"));
                 user.setEmail(rs.getString("Email"));
                 user.setContactNumber(rs.getString("ContactNumber"));
+                user.setImagePath(rs.getString("image_path"));
+
                 negotiators.add(user);
             }
         }

@@ -779,7 +779,8 @@
 
                     <div class="form-group">
                         <label for="fullName">Full Name</label>
-                        <input type="text" id="fullName" name="fullName" value="${user.fullName}" required>
+				<input type="text" id="fullName" name="fullName" value="${user.fullName}"
+    pattern="^[A-Za-z\s]+$" title="Only letters and spaces allowed" required>
                     </div>
 
                     <div class="form-group">
@@ -789,7 +790,8 @@
 
                     <div class="form-group">
                         <label for="contactNumber">Contact Number</label>
-                        <input type="text" id="contactNumber" name="contactNumber" value="${user.contactNumber}">
+						<input type="text" id="contactNumber" name="contactNumber" value="${user.contactNumber}"
+    pattern="^(97|98)[0-9]{8}$" title="Must start with 97 or 98 and be 10 digits long" required>
                     </div>
 
                     <div class="modal-footer">

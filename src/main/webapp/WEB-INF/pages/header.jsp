@@ -38,6 +38,9 @@
                         <li><a href="${pageContext.request.contextPath}/about">About Us</a></li>
                         <li><a href="${pageContext.request.contextPath}/contact">Contact Us</a></li>
 
+                        <li><a href="${pageContext.request.contextPath}/faq">FAQ</a></li>
+                        <li><a href="${pageContext.request.contextPath}/ourservices">Our Services</a></li>
+
                     </ul>
                 </nav>
                 <!-- USER DROPDOWN IF LOGGED IN -->
