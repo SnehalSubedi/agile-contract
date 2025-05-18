@@ -29,7 +29,7 @@ public class HomeServlet extends HttpServlet {
             response.sendRedirect("/agile-contract/login");
             return;
         }
-
+ 
         int negotiatorId = (int) session.getAttribute("userId");
 
         try {

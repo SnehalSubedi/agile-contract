@@ -19,7 +19,7 @@ public class ImageUtil {
         String fileName = UUID.randomUUID().toString() + "_" + filePart.getSubmittedFileName();
 
         // Set the upload path to be the custom directory
-        String uploadPath = "G:/EclipsServlets/agile-contract/src/main/webapp/resources/uploads";
+        String uploadPath = "/Users/snehalsubedi/eclipse-workspace/agile-contract/src/main/webapp/resources/uploads";
 
         // Ensure the directory exists
         File uploadDir = new File(uploadPath);
@@ -54,7 +54,7 @@ public class ImageUtil {
         if (filePart != null && filePart.getSize() > 0) {
             // Delete the existing image if present
             if (existingFileName != null && !existingFileName.isEmpty()) {
-                String uploadPath = "G:/EclipsServlets/agile-contract/src/main/webapp/resources/uploads";
+                String uploadPath = "/Users/snehalsubedi/eclipse-workspace/agile-contract/src/main/webapp/resources/uploads";
                 deleteImage(uploadPath, existingFileName);
             }
 

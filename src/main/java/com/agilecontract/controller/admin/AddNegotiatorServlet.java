@@ -54,7 +54,7 @@ public class AddNegotiatorServlet extends HttpServlet {
                 // Create a new user with the hashed password
                 User user = new User(username, password, fullName, email, contactNumber, role, passwordHash);
                 user.setImagePath(imagePath);
-
+ 
                 boolean success = userService.addUser(user);
                 if (success) {
                     response.sendRedirect("/agile-contract/Admin-Dashboard");
