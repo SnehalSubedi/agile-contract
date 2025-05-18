@@ -3,7 +3,7 @@ package com.agilecontract.Model;
 public class User {
     private int id;
     private String username;
-    private String password; // Raw password (for form handling, but shouldn't be stored as plain text)
+    private String password; // Raw password (for form handling, but shouldn't be stored as plain text))
     private String fullName;
     private String email;
     private String contactNumber;
